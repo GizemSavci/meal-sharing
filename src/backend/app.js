@@ -38,16 +38,17 @@ app.get("/future-meals", async (req, res) => {
     const futureMeals = await knex("meal")
       .select()
       .where("meal_time", ">", new Date());
-    if (futureMeals.length === 0) {
-      res.status(404).send("No meals found");
-    } else {
+    if (futureMeals.length >= 0) {
       res.status(200).json(futureMeals);
+    } else {
+      res.status(404).send("No meals found");
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 // Respond with all meals in the past (relative to the when datetime)
 app.get("/past-meals", async (req, res) => {
