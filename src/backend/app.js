@@ -79,7 +79,11 @@ app.get("/first-meal", async (req, res) => {
       .select()
       .orderBy("id")
       .first();
-    res.status(200).json(firstMeal)
+    if (firstMeal.length === 0){
+      res.status(404).send("No meal found");
+    }else {
+    res.status(200).json(firstMeal);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Error");
@@ -93,7 +97,11 @@ app.get("/last-meal", async (req, res) =>{
       .select()
       .orderBy("id", "desc")
       .first();
-    res.status(200).json(lastMeal)
+    if (lastMeal.length === 0){
+      res.status(404).send("No meal found");
+    } else {
+    res.status(200).json(lastMeal);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Error");
