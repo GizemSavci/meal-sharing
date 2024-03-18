@@ -50,13 +50,9 @@ app.get("/future-meals", async (req, res) => {
 app.get("/past-meals", async (req, res) => {
   try {
     const pastMeals = await knex("meal")
-    .select()
-    .where("meal_time", "<", new Date());
-    if (pastMeals === 0) {
-      res.status(404).send("No meals found");
-    } else {
-      res.status(200).json(pastMeals);
-    }
+      .select()
+      .where("meal_time", "<", new Date());
+    res.status(200).json(pastMeals);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
