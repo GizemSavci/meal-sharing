@@ -29,16 +29,51 @@ router.post('/', async (req, res) => {
             contact_name,
             contact_email
         });
+        if (newReservation){
+          res.status(201).json(newReservation)
+        }
     } catch (error) {
         console.error(error);
+        res.status(500).json({ messagge: "Internal server error"})
     }
 });
+
+// My new reservations:
+// {
+//   "id": 5,
+//   "number_of_guests": 2,
+//   "meal_id": 3,
+//   "created_date": "2024-04-07 23:00:00",
+//   "contact_phonenumber": "1234569",
+//   "contact_name": "Mette Pedersen",
+//   "contact_email": "mettep@gmail.com"
+// }
+
+// {
+//   "id": 6,
+//   "number_of_guests": 1,
+//   "meal_id": 1,
+//   "created_date": "2024-04-06T22:00:00.000Z",
+//   "contact_phonenumber": "1234565",
+//   "contact_name": "Henrik Henriksen",
+//   "contact_email": "henrikh@gmail.com"
+// }
+
+// {
+//   "id": 7,
+//   "number_of_guests": 1,
+//   "meal_id": 1,
+//   "created_date": "2024-04-06T22:00:00.000Z",
+//   "contact_phonenumber": "1234565",
+//   "contact_name": "Henrik Henriksen",
+//   "contact_email": "henrikh@gmail.com"
+// }
 
 // /api/reservations/:id	GET	Returns a reservation by id
 router.get('/:id', async (req, res) => {
     try {
       const { id } = req.params;
-      const reservationId = await knex.select('id').from('reservation');
+      const reservationId = await knex.select('*').from('reservation').where({ id });
       if (reservationId) {
         res.json(reservationId);
       }
@@ -79,3 +114,5 @@ router.delete('/:id', async (req, res) => {
       console.error(error);
     }
   })
+
+export default router;
