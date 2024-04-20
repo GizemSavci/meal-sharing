@@ -1,16 +1,16 @@
-import express, { response } from "express";
+import express from "express";
 const router = express.Router();
 import knex from "../database.js";
 
-router.get("/", async (request, response) => {
-  try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const titles = await knex("meal").select("title");
-    response.json(titles);
-  } catch (error) {
-    throw error;
-  }
-});
+// router.get("/", async (request, response) => {
+//   try {
+//     // knex syntax for selecting things. Look up the documentation for knex for further info
+//     const titles = await knex("meal").select("title");
+//     response.json(titles);
+//   } catch (error) {
+//     throw error;
+//   }
+// });
 
 // maxPrice	Number	Returns all meals that are cheaper than maxPrice.	api/meals?maxPrice=90
 router.get("/", async (request, response) => {
