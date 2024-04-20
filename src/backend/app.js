@@ -4,7 +4,8 @@ import mealsRouter from "./api/meals.js";
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import knex from 'knex';
+import reservationsRouter from "./api/reservations.js"
+//import knex from 'knex';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,7 +27,7 @@ app.use(express.json());
 app.use(cors());
 
 router.use("/meals", mealsRouter);
-
+router.use("/reservations", reservationsRouter);
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
 } else {
