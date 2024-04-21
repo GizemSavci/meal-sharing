@@ -12,15 +12,14 @@ import knex from "../database.js";
 //   }
 // });
 
-// maxPrice	Number	Returns all meals that are cheaper than maxPrice.	api/meals?maxPrice=90
-// availableReservations	Boolean	Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1	api/meals?availableReservations=true
-//  title	String	Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde.	api/meals?title=Indian%20platter
-// dateAfter	Date	Returns all meals where the date for when is after the given date.	api/meals?dateAfter=2022-10-01
-// dateBefore	Date	Returns all meals where the date for when is before the given date.	api/meals?dateBefore=2022-08-08
-// sortKey	String	Returns all meals sorted by the given key. Allows when, max_reservations and price as keys. Default sorting order is asc(ending).	api/meals?sortKey=price
-// sortDir	String	Returns all meals sorted in the given direction. Only works combined with the sortKey and allows asc or desc.	api/meals?sortKey=price&sortDir=desc
-// limit	Number	Returns the given number of meals.	api/meals?limit=7
-
+// maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90
+// availableReservations  Boolean Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1 api/meals?availableReservations=true
+//  title String  Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde. api/meals?title=Indian%20platter
+// dateAfter  Date  Returns all meals where the date for when is after the given date.  api/meals?dateAfter=2022-10-01
+// dateBefore Date  Returns all meals where the date for when is before the given date. api/meals?dateBefore=2022-08-08
+// sortKey  String  Returns all meals sorted by the given key. Allows when, max_reservations and price as keys. Default sorting order is asc(ending). api/meals?sortKey=price
+// sortDir  String  Returns all meals sorted in the given direction. Only works combined with the sortKey and allows asc or desc. api/meals?sortKey=price&sortDir=desc
+// limit  Number  Returns the given number of meals.  api/meals?limit=7
 
 router.get("/", async (req, res) => {
   const {
@@ -34,72 +33,63 @@ router.get("/", async (req, res) => {
     sortDir
   } = req.query;
 
-
   let query = knex('meal')
 
   if (maxPrice){
-    query.where('price', '<', req.query.maxPrice)
+    query.where('price', '<', +req.query.maxPrice)
     res.json( await query)
   }
 
-  //let availableReservations = true;
-  if (availableReservations){
-    query.innerJoin("reservation", "meal.id", "reservation.meal_id").groupBy("meal.id");
-    res.json( await query)
-    
+  if (availableReservations === 'true') {
+    query.leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
+         .groupBy('meal.id')
+         .havingRaw('SUM(reservation.number_of_guests) < meal.max_reservations');
   }
-  // maxPrice = await knex('meal').select('price').where('price', '<', req.query.maxPrice);
-  // res.json(maxPrice);
 
-  // availableReservations = await knex('meal').innerJoin("reservation", "meal.id", "reservation.meal_id").groupBy("meal.id");
-  // res.json(availableReservations);
-  //availableReservations = awwait knex()
-})
+  if (title){
+    query.where('meal.title', 'like', `${title}`);
+  }
 
-  // if (availableReservations){
-  //   response.json(availableReservations);
-  // }
-  // })
+  if (dateAfter) {
+    query.where('meal_time', '>', dateAfter);
+  }
 
+  if (dateBefore) {
+    query.where('meal_time', '<', dateBefore);
+  }
 
+if (limit) {
+  query.limit(+limit);
+}
 
+if (sortKey) {
+  let orderByColumn;
+  switch (sortKey) {
+    case 'when':
+      orderByColumn = 'meal_time';
+      break;
+    case 'max_reservations':
+      orderByColumn = 'max_reservations';
+      break;
+    case 'price':
+      orderByColumn = 'price';
+      break;
+    default:
+      orderByColumn = 'meal_time'; // Default sorting key
+  }
 
-// availableReservations	Boolean	Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1	api/meals?availableReservations=true
-// router.get("/", async (request, response) => {
-//   try {
-//     const availableReservations = await knex("meal").innerJoin("reservation", "meal.id", "reservation.meal_id").groupBy("meal.id")
-//     .select("meal.*").having("meal.max_reservations", ">", knex.sum("reservation.number_of_guests"));
-//     if (availableReservations){
-//       response.json(availableReservations);
-//     }else{
-//       response.status(404).send("No meals found");
-//     }
-//   }
-//     catch (error) {
-//       throw error;
-//     }
-//   })
+  let sortOrder = sortDir === 'desc' ? 'desc' : 'asc';
+  query.orderBy(orderByColumn, sortOrder);
+}
 
-//  title	String	Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde.	api/meals?title=Indian%20platter
-// router.get("/", async (request, response) => {
-//   try{
-//   const title = await knex("meal").where("title", "like", "%Rød%grød%med%fløde");
-//   response.json(title);
-//   }catch (error) {
-//     throw error;
-//   }
-// })
-
-
-// limit	Number	Returns the given number of meals.	api/meals?limit=7
-// router.get("/", async (request, response) => {
-// try { 
-// const limit = await knex("meal").limit(3);
-// response.json(limit);
-// }catch (error) {
-//   throw error;
-// }
-// })
+  try {
+    const meals = await query.select('*');
+    res.json(meals);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 export default router;
+
