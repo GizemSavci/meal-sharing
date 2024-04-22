@@ -28,9 +28,9 @@ app.use(express.json());
 
 app.use(cors());
 
-router.use("meals", mealsRouter);
-router.use("reviews", reviewsRouter);
-router.use("reservations", reservationRouter);
+router.use("/meals", mealsRouter);
+router.use("/reviews", reviewsRouter);
+router.use("/reservations", reservationRouter);
 
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
