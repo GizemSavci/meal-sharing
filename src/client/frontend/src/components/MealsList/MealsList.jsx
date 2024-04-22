@@ -4,8 +4,7 @@ function MealsList() {
 
     const [meals, setMeals] = useState([]);
 
-    const apiUrl = "https://toolbox-4b2da-default-rtdb.europe-west1.firebasedatabase.app/workshops.json?auth=JQBdY7NTCLQOkxFLnUGFml4KeFNp6LVgHvJV4Tgz"
-
+    const apiUrl = "http://localhost:5001/api/meals"
     useEffect(() =>{
         const fetchData = async () => {
             const response = await fetch(apiUrl);
@@ -22,7 +21,7 @@ function MealsList() {
                 <ul>
                     {meals.map(meal => (
                         <li key={meal.id}>
-                            {meal.title}
+                            {meal.title}: {meal.description}, {meal.price}
                         </li>
                     ))}
                 </ul>

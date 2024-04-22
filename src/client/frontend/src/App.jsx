@@ -1,15 +1,12 @@
-import { useState } from 'react'
 import './App.css'
-import MealsList from './components/MealsList/MealsList';
-import ExperimentalComponet from './components/ExperimentalComponet/ExperimentalComponet';
+import HomePage from './components/HomePage/HomePage';
+
 function App() {
 
   return (
     <>
       <div>
-        <ExperimentalComponet />
-        <MealsList />
-
+        <HomePage />
       </div>
     </>
   )
