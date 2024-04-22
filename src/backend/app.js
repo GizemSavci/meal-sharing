@@ -1,7 +1,8 @@
 import express from "express";
 import path from "path";
 import mealsRouter from "./api/meals.js";
-import reviewsRouter from "./api/reviews.js"
+import reviewsRouter from "./api/reviews.js";
+import reservationRouter from "./api/reservations.js";
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -27,8 +28,10 @@ app.use(express.json());
 
 app.use(cors());
 
-router.use("/meals", mealsRouter);
+router.use("meals", mealsRouter);
 router.use("reviews", reviewsRouter);
+router.use("reservations", reservationRouter);
+
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
 } else {
