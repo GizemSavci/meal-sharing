@@ -1,17 +1,17 @@
 .meal-card{
     border-radius: 8px;
     padding: 16px;
-    background-color: #e4defc;
-    transition: box-shadow 0.3s ease;
+    background-color: #c5c0ff;
     margin: 20px;
+    width: 360px;
 }
 
 h4 {
-    color: #888;
+    color: #2400a2;
 }
 
 p {
-    color: #888;
+    color: #2400a2;
 }
 
 .image-container {

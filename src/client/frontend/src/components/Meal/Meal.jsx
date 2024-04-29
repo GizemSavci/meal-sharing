@@ -1,7 +1,9 @@
 import './Meal.css';
+import { useNavigate } from "react-router-dom";
 
 function Meal({ meal, mealImage }) {
-    console.log("Meal Image:", mealImage); 
+    const navigate = useNavigate();
+
     return (
         <div className="meal-card">
             <div className="image-container">
@@ -12,6 +14,11 @@ function Meal({ meal, mealImage }) {
             <div className="detail-container">
                 <p>Price: {meal.price} kr</p>
                 <p>Location: {meal.location}</p>
+                <button onClick={() => {
+                    navigate(`/meals/${meal.id}`);
+                }}>
+                    See details
+                </button>
             </div>
         </div>
     );
