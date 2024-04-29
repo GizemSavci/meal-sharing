@@ -32,6 +32,86 @@ router.use("/meals", mealsRouter);
 router.use("/reviews", reviewsRouter);
 router.use("/reservations", reservationRouter);
 
+// Copy from nodejs-week1
+
+// 	Respond with all meals in the future (relative to the when datetime)
+app.get("/future-meals", async (req, res) => {
+  try {
+    const futureMeals = await knex("meal")
+      .select()
+      .where("meal_time", ">", new Date());
+      res.status(200).json(futureMeals);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+// Respond with all meals in the past (relative to the when datetime)
+app.get("/past-meals", async (req, res) => {
+  try {
+    const pastMeals = await knex("meal")
+      .select()
+      .where("meal_time", "<", new Date());
+    res.status(200).json(pastMeals);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Respond with all meals sorted by ID
+app.get("/all-meals", async (req, res) => {
+  try {
+    const allMeals = await knex("meal")
+      .select()
+      .orderBy("id");
+    res.status(200).json(allMeals)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error");
+  }
+});
+
+// Respond with the first meal (meaning with the minimum id)
+app.get("/first-meal", async (req, res) => {
+  try {
+    const firstMeal = await knex("meal")
+      .select()
+      .orderBy("id")
+      .first();
+    if (firstMeal.length === 0){
+      res.status(404).send("No meal found");
+    }else {
+    res.status(200).json(firstMeal);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error");
+  }
+});
+
+// Respond with the last meal (meaning with the maximum id)
+app.get("/last-meal", async (req, res) =>{
+  try {
+    const lastMeal = await knex("meal")
+      .select()
+      .orderBy("id", "desc")
+      .first();
+    if (lastMeal.length === 0){
+      res.status(404).send("No meal found");
+    } else {
+    res.status(200).json(lastMeal);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error");
+  }
+})
+
+// end of copy from nodejs-week1
+
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
 } else {

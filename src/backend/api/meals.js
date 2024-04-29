@@ -12,6 +12,100 @@ import knex from "../database.js";
 //   }
 // });
 
+// Copy from node-week2/gizem
+
+router.get('/', async (req, res) => {
+  try {
+    const allMeals = await knex.select('*').from('meal');
+    if (allMeals){
+      res.json(allMeals);
+    }else {
+      res.send('No meals found')
+    }
+}catch (error){
+    console.error(error)
+  }
+});
+
+// /api/meals	POST	Adds a new meal to the database
+router.post('/', async (req, res) => {
+  try {
+    const { title, description, location, meal_time, max_reservations, price, created_date } = req.body;
+    const newMealId = await knex('meal').insert({ title, description, location, meal_time, max_reservations, price, created_date });
+    if (newMealId.length > 0) {
+      res.status(201).json({ id: newMealId[0], message: "Meal created successfully" });
+    } else {
+      res.status(400).json({ message: "Failed to create meal" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+// /api/meals/:id	GET	Returns the meal by id
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const mealId = await knex.select('*').from('meal').where({ id });
+    if (mealId) {
+      res.json(mealId);
+    }
+  }catch (error){
+    console.error(error)
+  }
+})
+
+// /api/meals/:id	PUT	Updates the meal by id
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, location, meal_time, max_reservation, price, created_date } = req.body;
+    const updatedMeal = await knex('meal')
+    .where({'id': id})
+    .update({ title, description, location, meal_time, max_reservation, price, created_date });
+    if (updatedMeal) {
+      return res.json(updatedMeal);
+    }else {
+      return res.send('No updated meal found.')
+    }
+  }catch (error) {
+    console.error(error);
+  }
+});
+
+// GET all reviews for a specific meal 28.04
+router.get("/:meal_id/reviews", async (req, res) => {
+  const mealId = req.params.meal_id;
+  try {
+      const allReviews = await knex("review").where("meal_id", mealId);
+      res.json(allReviews);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedMeal = await knex('meal').where({'id': id}).del();
+    if (deletedMeal){
+      return res.json({message: 'Meal deleted'});
+    }else {
+      return res.json({message: 'Meal not found'})
+    }
+  }catch (error) {
+    console.error(error);
+  }
+})
+
+// End of copy from node-week2/gizem
+
+
+
+
 // maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90
 // availableReservations  Boolean Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1 api/meals?availableReservations=true
 //  title String  Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde. api/meals?title=Indian%20platter

@@ -1,71 +1,63 @@
 import express from 'express';
+const router = express.Router();
 import knex from '../database.js';
 
-const router = express.Router();
 
-// /api/reviews	GET	Returns all reviews.
+
+// GET all reviews
 router.get("/api/reviews", async (request, response) => {
     try {
-        const reviews = await knex("reservation").select();
+        const reviews = await knex("review").select();
         response.send(reviews);
     } catch (error) {
         throw error;
     }
-})
+});
 
-// /api/meals/:meal_id/reviews GET	Returns all reviews for a specific meal.
-router.get("/:meal_id/reviews", async (request, response) => {
-    const mealId = req.params.meal_id;
-    try {
-        const allReviews = await knex("review").where(mealId, meal_id);
-        response.json(allReviews);
-    } catch (error) {
-        throw error;
-      }
-})
 
-// /api/reviews	POST Adds a new review to the database.
+// POST a new review
 router.post("/api/reviews", async (req, res) =>{
-    const newReview = req.params;
+    const newReviewData = req.body;
     try {
-        newReview =await knex("review").insert( {title: "Great Local Pizza"}, {description: "Intasted local pizza with local ingredients. Love it!"}, {meal_id: 1}, {stars: 5}, {created_date: "2024-04-04"});
+        const newReview = await knex("review").insert(newReviewData);
         res.send(newReview);
     } catch (error) {
         throw error;
-      }
-})
+    }
+});
 
-// /api/reviews/:id	GET	Returns a review by id.
-router.get("/:id", async (req, res) =>{
-    const reviewId = req.params;
-    try{
-        reviewId = await knex("review").where(id, id);
-        res.send(reviewId);
+// GET a review by ID
+router.get("/api/reviews/:id", async (req, res) =>{
+    const { id } = req.params;
+    try {
+        const review = await knex("review").where("id", id);
+        res.send(review);
     } catch (error) {
         throw error;
-      }
-})
+    }
+});
 
-// /api/reviews/:id	PUT	Updates the review by id.
-router.put("/:id", async (req, res) =>{
-    const reviewUpdated = req.params;
-    try{
-        reviewUpdated = await knex("review").where(id, id).update(req.body);
-        res.send(reviewUpdated);
+// PUT update a review by ID
+router.put("/api/reviews/:id", async (req, res) =>{
+    const { id } = req.params;
+    const updatedReviewData = req.body;
+    try {
+        const updatedReview = await knex("review").where("id", id).update(updatedReviewData);
+        res.send(updatedReview);
     } catch (error) {
         throw error;
-      }
-})
+    }
+});
 
-// /api/reviews/:id	DELETE	Deletes the review by id.
-router.delete("/:id", async (req, res) =>{
-    const reviewDeleted = req.params;
-    try{
-        reviewDeleted = await knex("review").where(id, id).update(req.body);
-        res.send(reviewDeleted);
+// DELETE a review by ID
+router.delete("/api/reviews/:id", async (req, res) =>{
+    const { id } = req.params;
+    try {
+        const deletedReview = await knex("review").where("id", id).del();
+        res.send(deletedReview);
     } catch (error) {
         throw error;
-      } 
-})
+    } 
+});
 
 export default router;
