@@ -5,7 +5,7 @@ import knex from '../database.js';
 
 
 // GET all reviews
-router.get("/api/reviews", async (request, response) => {
+router.get("/", async (request, response) => {
     try {
         const reviews = await knex("review").select();
         response.send(reviews);

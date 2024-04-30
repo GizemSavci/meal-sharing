@@ -14,18 +14,18 @@ import knex from "../database.js";
 
 // Copy from node-week2/gizem
 
-router.get('/', async (req, res) => {
-  try {
-    const allMeals = await knex.select('*').from('meal');
-    if (allMeals){
-      res.json(allMeals);
-    }else {
-      res.send('No meals found')
-    }
-}catch (error){
-    console.error(error)
-  }
-});
+// router.get('/', async (req, res) => {
+//   try {
+//     const allMeals = await knex.select('*').from('meal');
+//     if (allMeals){
+//       res.json(allMeals);
+//     }else {
+//       res.send('No meals found')
+//     }
+// }catch (error){
+//     console.error(error)
+//   }
+// });
 
 // /api/meals	POST	Adds a new meal to the database
 router.post('/', async (req, res) => {
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const mealId = await knex.select('*').from('meal').where({ id });
+    const [mealId] = await knex.select('*').from('meal').where({ id });
     if (mealId) {
       res.json(mealId);
     }
@@ -106,11 +106,11 @@ router.delete('/:id', async (req, res) => {
 
 
 
-// maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90
+// maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90 WORKS
 // availableReservations  Boolean Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1 api/meals?availableReservations=true
-//  title String  Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde. api/meals?title=Indian%20platter
-// dateAfter  Date  Returns all meals where the date for when is after the given date.  api/meals?dateAfter=2022-10-01
-// dateBefore Date  Returns all meals where the date for when is before the given date. api/meals?dateBefore=2022-08-08
+//  title String  Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde. api/meals?title=Indian%20platter WORKS
+// dateAfter  Date  Returns all meals where the date for when is after the given date.  api/meals?dateAfter=2022-10-01 WORKS
+// dateBefore Date  Returns all meals where the date for when is before the given date. api/meals?dateBefore=2022-08-08 WORKS
 // sortKey  String  Returns all meals sorted by the given key. Allows when, max_reservations and price as keys. Default sorting order is asc(ending). api/meals?sortKey=price
 // sortDir  String  Returns all meals sorted in the given direction. Only works combined with the sortKey and allows asc or desc. api/meals?sortKey=price&sortDir=desc
 // limit  Number  Returns the given number of meals.  api/meals?limit=7
@@ -128,32 +128,34 @@ router.get("/", async (req, res) => {
   } = req.query;
 
   let query = knex('meal')
-
+  //console.log(maxPrice);
+  
   if (maxPrice){
-    query.where('price', '<', +req.query.maxPrice)
-    res.json( await query)
+  
+    query = query.where('price', '<', +req.query.maxPrice)
+    //res.json( await query)
   }
 
   if (availableReservations === 'true') {
-    query.leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
+    query = query.leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
          .groupBy('meal.id')
          .havingRaw('SUM(reservation.number_of_guests) < meal.max_reservations');
   }
 
   if (title){
-    query.where('meal.title', 'like', `${title}`);
+    query = query.where('meal.title', 'like', `${title}`);
   }
 
   if (dateAfter) {
-    query.where('meal_time', '>', dateAfter);
+    query = query.where('meal_time', '>', dateAfter);
   }
 
   if (dateBefore) {
-    query.where('meal_time', '<', dateBefore);
+    query = query.where('meal_time', '<', dateBefore);
   }
 
 if (limit) {
-  query.limit(+limit);
+  query = query.limit(+limit);
 }
 
 if (sortKey) {
@@ -169,7 +171,7 @@ if (sortKey) {
       orderByColumn = 'price';
       break;
     default:
-      orderByColumn = 'meal_time'; // Default sorting key
+      orderByColumn = 'meal_time';
   }
 
   let sortOrder = sortDir === 'desc' ? 'desc' : 'asc';

@@ -17,7 +17,7 @@ const MealDetail = () => {
             try {
                 const response = await fetch(`http://localhost:5001/api/meals/${id}`);
                 const data = await response.json();
-                setMeal(data[0]);
+                setMeal(data);
             } catch (error) {
                 console.error('Error fetching meal:', error);
             }
@@ -77,14 +77,14 @@ const MealDetail = () => {
     return (
         <div>
             <h2>{meal.title}</h2>
-            {/* Render other meal details */}
+            
             <p>Description: {meal.description}</p>
             <p>Location: {meal.location}</p>
             <p>Meal Time: {meal.meal_time}</p>
             <p>Max Reservations: {meal.max_reservations}</p>
             <p>Price: {meal.price}</p>
 
-            {/* Render Reviews */}
+            
             <h3>Reviews</h3>
             {reviews.map(review => (
                 <div key={review.id}>
@@ -94,7 +94,7 @@ const MealDetail = () => {
                 </div>
             ))}
 
-            {/* Reservation Form */}
+            
             <form onSubmit={handleSubmit}>
                 <label htmlFor="phoneNumber">Phone Number:</label>
                 <input
@@ -126,7 +126,7 @@ const MealDetail = () => {
                 <button type="submit">Book Seat</button>
             </form>
 
-            {/* Reservation Status */}
+            
             {reservationStatus && <p>{reservationStatus}</p>}
         </div>
     );
