@@ -17,38 +17,50 @@
 <p align="center"> Website api for sharing meals together. Invite your best friends or your family for dinner!
     <br> 
 </p>
+<img width="1470" alt="MealSharingHeroImage" src="https://github.com/GizemSavci/meal-sharing/assets/129002582/7dacd07f-66ab-4cd1-922b-31b651afce88">
+P.S: An awesome logo in in progress.
+
 
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Built Using](#built_using)
+- [C4 Model Visualisation](#c4_model_visualisation)
+- [Demo](#demo)
 - [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
 
-This is a 10 weeks long fullstack project throught NodeJS and React learning modules. Project stack: MySQL, NodeJS, ExpressJS, KnexJS, Vite and React, Material Design Theme Provider, React Icons, Figma.
-
-This project will be built out over 3 different classes:
-
-- **Nodejs week 3** - Here you will be building the backend api. Meaning you will work in the `src/backend` folder.
-- **React week 5** - Here you will be building the frontend components and routing. In this week you will be working in the `src/client` folder.
-- **Meal sharing class** - After week 5 of react you will have a specific class for finishing the meal sharing website. Here you will make everything work and deploy the website to the internet
-
-## 🏁 Getting Started <a name = "getting_started"></a>
+This is a 10-week-long full-stack project throughout Node.js and React learning modules. The project stack includes MySQL, Docker, Node.js, Express.js, Knex.js, Postman, Vite, React, Material Design Theme Provider, React Icons, and Figma.
 
 
-### Environment variables
+- **C4 Model Visualisation <a name="c4_model_visualisation"**
 
-All sensitive data like fx passwords and usernames, we dont want to add to git! This problem we solve by having environment variables. Environment variables are not committed to git and have a key value structure.
+- System Context Diagram:
 
-Remember to copy the `.env.example` file, and rename the copied file to `.env`. In the `.env` file add the relevant host, database name, database user and pasword to your own local database. If you are unsure of these things then select your database in the Mysql Workbench. Now press `Database` -> `Manage Connections...`. Here you can see everything you need except the password. If you forgot that, reset it.
+![SystemContextDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/358cc3f5-b30c-469f-bf0c-ec329579ba45)
 
-### Prerequisites
+- Container Diagram:
 
-- Postman
-- MySQL Workbench
+![ContainerDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/797f59f4-002b-4c63-a1e2-d566a17c4c09)
+
+
+- Component and API Diagram:
+
+![ComponentandAPIDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/cbbda0b7-7678-4f91-97ac-00f827a61454)
+
+
+
+## Demo (Recorded on 01.05.2024) <a name = "demo"></a>
+
+
+https://github.com/GizemSavci/meal-sharing/assets/129002582/cca69330-9e48-40fc-ac56-79eb1a7b9e33
+
+
+
+
+### Fun Fact
+The painting is one of my favorite paintings and dates back to 1630. It's 'A Peasant Wedding Feast' by Pieter Brueghel the Younger.
+
 
 ### Installing
 
