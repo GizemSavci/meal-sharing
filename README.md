@@ -28,7 +28,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Link to deployed website: 
+This is a 10 weeks long fullstack project throught NodeJS and React learning modules. Project stack: MySQL, NodeJS, ExpressJS, KnexJS, Vite and React, Material Design Theme Provider, React Icons, Figma.
 
 This project will be built out over 3 different classes:
 
