@@ -37,8 +37,9 @@ This is an ongoing 10-week-long full-stack web application project.<br>
 • Frontend: Vite, React<br>
 • Styling and design guides: Material Design Theme Provider, React Icons, Figma<br>
 
-GET methods allow to render meals, reviews and reservations from database.
-POST methods allow to add meals, reviews and reservations to database.
+#### GET methods: Used to retrieve data from the database, specifically meals, reviews, and reservations. This data is then rendered on the frontend, allowing users to view existing information.<br>
+#### POST methods: Used to add new data to the database, such as adding new meals, reviews, and reservations. This functionality enables users to contribute new information to the application.<br>
+<br>
 
 - **C4 Model Visualisation** <a name="c4_model_visualisation"></a>
 - System Context Diagram:
