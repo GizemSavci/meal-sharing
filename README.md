@@ -31,7 +31,7 @@ P.S: An awesome logo is in progress.
 
 This is an ongoing 10-week-long full-stack web application project.<br>
 **Tech Stack**<br>
-• Database: MySQL on Docker<br>
+• Database: MySQL in Docker<br>
 • Backend: Node.js, Express.js, Knex.js<br>
 • API Calls: Postman<br>
 • Frontend: Vite, React<br>
