@@ -1,9 +1,9 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://www.hackyourfuture.dk/static/logo-dark.svg" alt="Project logo"></a>
+
 </p>
 
-<h3 align="center">Meal sharing api</h3>
+<h3 align="center">Fullstack Meal Sharing Web Application</h3>
 
 <div align="center">
 
@@ -14,11 +14,11 @@
 
 ---
 
-<p align="center"> Website api for sharing meals together. Invite your best friends or your family for dinner!
+<p align="center"> Invite your best friends or your family for dinner! Or make new friends by sharing your meals!
     <br> 
 </p>
 <img width="1470" alt="MealSharingHeroImage" src="https://github.com/GizemSavci/meal-sharing/assets/129002582/7dacd07f-66ab-4cd1-922b-31b651afce88">
-P.S: An awesome logo in in progress.
+P.S: An awesome logo is in progress.
 
 
 ## 📝 Table of Contents
@@ -26,11 +26,16 @@ P.S: An awesome logo in in progress.
 - [About](#about)
 - [C4 Model Visualisation](#c4_model_visualisation)
 - [Demo](#demo)
-- [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
 
-This is a 10-week-long full-stack project throughout Node.js and React learning modules. The project stack includes MySQL, Docker, Node.js, Express.js, Knex.js, Postman, Vite, React, Material Design Theme Provider, React Icons, and Figma.
+This is an ongoing 10-week-long full-stack web application project.<br>
+**Tech Stack**<br>
+• Database: MySQL on Docker<br>
+• Backend: Node.js, Express.js, Knex.js<br>
+• API Calls: Postman<br>
+• Frontend: Vite, React<br>
+• Styling and design: Material Design Theme Provider, React Icons<br>
 
 
 - **C4 Model Visualisation** <a name="c4_model_visualisation"></a>
@@ -56,31 +61,6 @@ https://github.com/GizemSavci/meal-sharing/assets/129002582/cca69330-9e48-40fc-a
 
 
 
-
 ### Fun Fact
 The painting is one of my favorite paintings and dates back to 1630. It's 'A Peasant Wedding Feast' by Pieter Brueghel the Younger.
 
-
-### Installing
-
-To install run `npm install`
-
-## 🎈 Usage <a name="usage"></a>
-
-To run `npm run dev`
-
-The api can now be found on `http://localhost:3000/api/` an example is `http://localhost:3000/api/meals`
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [Mysql](https://www.npmjs.com/package/mysql) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## ☁️ Deployment <a name = "deployment"></a>
-
-[Deployment guide](https://github.com/HackYourFuture-CPH/deployment-guide)
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@benna100](https://github.com/benna100) - Idea & Initial work
