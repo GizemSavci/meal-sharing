@@ -35,8 +35,10 @@ This is an ongoing 10-week-long full-stack web application project.<br>
 • Backend: Node.js, Express.js, Knex.js<br>
 • API Calls: Postman<br>
 • Frontend: Vite, React<br>
-• Styling and design: Material Design Theme Provider, React Icons<br>
+• Styling and design guides: Material Design Theme Provider, React Icons, Figma<br>
 
+GET methods allow to render meals, reviews and reservations from database.
+POST methods allow to add meals, reviews and reservations to database.
 
 - **C4 Model Visualisation** <a name="c4_model_visualisation"></a>
 - System Context Diagram:
