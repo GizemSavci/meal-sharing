@@ -33,8 +33,7 @@ P.S: An awesome logo in in progress.
 This is a 10-week-long full-stack project throughout Node.js and React learning modules. The project stack includes MySQL, Docker, Node.js, Express.js, Knex.js, Postman, Vite, React, Material Design Theme Provider, React Icons, and Figma.
 
 
-- **C4 Model Visualisation <a name="c4_model_visualisation"**
-
+- **C4 Model Visualisation** <a name="c4_model_visualisation"></a>
 - System Context Diagram:
 
 ![SystemContextDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/358cc3f5-b30c-469f-bf0c-ec329579ba45)
