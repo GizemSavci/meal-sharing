@@ -1,6 +1,6 @@
 import { useState } from "react";
-import {Link} from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import Logo from "../Logo/Logo";
 import './Navbar.css';
 
 
@@ -9,7 +9,7 @@ export const Navbar = () => {
 
     return (
         <nav>
-            <Link to="/" className="title">Website</Link>
+            <Logo></Logo>
             <div className="menu" onClick={() => {
                 setmenuOpen(!menuOpen)
             }}>
