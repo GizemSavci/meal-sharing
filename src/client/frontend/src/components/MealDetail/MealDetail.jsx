@@ -30,7 +30,7 @@ const MealDetail = () => {
             try {
                 const response = await fetch(`http://localhost:5001/api/meals/${id}/reviews`);
                 const data = await response.json();
-                setReviews(data);
+                setReviews([data]);
             } catch (error) {
                 console.error('Error fetching reviews:', error);
             }
