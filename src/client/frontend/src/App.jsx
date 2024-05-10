@@ -9,9 +9,11 @@ import NoPage from './components/NoPage/NoPage';
 function App() {
 
   return (
+
     <>
       <div>
         <Navbar />
+
         <Routes>
           <Route path="/" element={<HomePage />}/>
           <Route path="/about" element={<About />}/>
@@ -22,6 +24,7 @@ function App() {
         </Routes>
       </div>
     </>
+   
   )
 }
 

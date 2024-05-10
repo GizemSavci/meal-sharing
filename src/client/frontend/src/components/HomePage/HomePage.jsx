@@ -12,6 +12,7 @@ function HomePage() {
         <>
             <div className="homepage-container">
                 <Hero></Hero>
+                
                 <div className="horizontal-grid">
                     <MealsList numMeals={2}></MealsList>
                 </div>
