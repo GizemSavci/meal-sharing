@@ -1,23 +1,39 @@
-import { FaSearch } from "react-icons/fa";
-import './SearchBar.css';
-import { useState } from "react";
+import { useState } from 'react';
+import SearchResultList from '../SearchResultList/SearchResultList';
 
-export const SearchBar = ({ onSearch }) => {
-    const [input, setInput] = useState("");
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-    const handleChange = (value) => {
-        setInput(value);
-    };
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-    const handleSearch = () => {
-        onSearch(input);
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/meals?title=${encodeURIComponent(searchQuery)}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    return (
-        <div className="input-wrapper">
-            <FaSearch id="search-icon" />
-            <input placeholder="Type to search..." value={input} onChange={(e) => handleChange(e.target.value)}/>
-            <button onClick={handleSearch}>Search</button>
-        </div>
-    )
-}
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search by meal title"
+        value={searchQuery}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleSearch}>Search</button>
+      <SearchResultList searchResults={searchResults} />
+    </div>
+  );
+};
+
+export default SearchBar;

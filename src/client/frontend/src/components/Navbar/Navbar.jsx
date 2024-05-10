@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import './Navbar.css';
-
+import SearchBar from "../SearchBar/SearchBar";
 
 export const Navbar = () => {
     const [menuOpen, setmenuOpen] = useState(false);
@@ -10,6 +10,7 @@ export const Navbar = () => {
     return (
         <nav>
             <Logo></Logo>
+            <SearchBar></SearchBar>
             <div className="menu" onClick={() => {
                 setmenuOpen(!menuOpen)
             }}>
