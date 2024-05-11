@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
           res.status(201).json(newReservation)
         }
     } catch (error) {
-        console.error(error);
+        console.error('Error submitting reservation:', error);
         res.status(500).json({ messagge: "Internal server error"})
     }
 });
