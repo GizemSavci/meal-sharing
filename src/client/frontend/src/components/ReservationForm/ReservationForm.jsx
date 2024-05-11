@@ -1,5 +1,6 @@
 import './ReservationForm.css';
 import { useState } from "react";
+import SuccesfulModal from '../SuccesfulModal/SuccesfulModal';
 
 function ReservationForm({ mealId }) {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function ReservationForm({ mealId }) {
         email: ""
     });
     const [error, setError] = useState("");
+    const [showModal, setShowModal] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,6 +46,7 @@ function ReservationForm({ mealId }) {
 
             if (response.ok) {
                 console.log('Reservation submitted successfully!');
+                setShowModal(true);
                 setFormData({
                     guests: "",
                     phone: "",
@@ -59,6 +62,10 @@ function ReservationForm({ mealId }) {
             console.error('Error submitting reservation:', error);
             setError("An error occurred while submitting reservation");
         }
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -80,6 +87,8 @@ function ReservationForm({ mealId }) {
 
                 <button type="submit">Submit</button>
             </form>
+
+            <SuccesfulModal isOpen={showModal} onClose={closeModal} />
         </>
     );
 }
