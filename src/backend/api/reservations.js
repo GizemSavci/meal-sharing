@@ -18,56 +18,25 @@ router.get('/', async (req, res) => {
 
 // /api/reservations	POST	Adds a new reservation to the database
 router.post('/', async (req, res) => {
-    try {
-        const {id, number_of_guests, meal_id, created_date, contact_phonenumber, contact_name, contact_email} = req.body;
-        const newReservation = await knex('reservation').insert({
-            id,
-            number_of_guests,
-            meal_id,
-            created_date,
-            contact_phonenumber,
-            contact_name,
-            contact_email
-        });
-        if (newReservation){
-          res.status(201).json(newReservation)
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ messagge: "Internal server error"})
-    }
+  try {
+    const { number_of_guests, meal_id, contact_phonenumber, contact_name, contact_email } = req.body;
+
+    const [reservationId] = await knex('reservation').insert({
+      number_of_guests,
+      meal_id,
+      created_date: new Date(),
+      contact_phonenumber,
+      contact_name,
+      contact_email
+    });
+
+    res.status(201).json({ message: 'Reservation added successfully', reservationId });
+  } catch (error) {
+    console.error('Error adding reservation:', error);
+    res.status(500).json({ error: 'Could not add reservation' });
+  }
 });
 
-// My new reservations:
-// {
-//   "id": 5,
-//   "number_of_guests": 2,
-//   "meal_id": 3,
-//   "created_date": "2024-04-07 23:00:00",
-//   "contact_phonenumber": "1234569",
-//   "contact_name": "Mette Pedersen",
-//   "contact_email": "mettep@gmail.com"
-// }
-
-// {
-//   "id": 6,
-//   "number_of_guests": 1,
-//   "meal_id": 1,
-//   "created_date": "2024-04-06T22:00:00.000Z",
-//   "contact_phonenumber": "1234565",
-//   "contact_name": "Henrik Henriksen",
-//   "contact_email": "henrikh@gmail.com"
-// }
-
-// {
-//   "id": 7,
-//   "number_of_guests": 1,
-//   "meal_id": 1,
-//   "created_date": "2024-04-06T22:00:00.000Z",
-//   "contact_phonenumber": "1234565",
-//   "contact_name": "Henrik Henriksen",
-//   "contact_email": "henrikh@gmail.com"
-// }
 
 // /api/reservations/:id	GET	Returns a reservation by id
 router.get('/:id', async (req, res) => {

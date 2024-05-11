@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MealReview from "../MealReview/MealReview";
+import ReservationForm from "../ReservationForm/ReservationForm";
 
 const MealDetail = () => {
     const { id } = useParams();
@@ -26,16 +27,22 @@ const MealDetail = () => {
     }
 
     return (
-        <div>
-            <h2>{meal.title}</h2>
-            <p>Description: {meal.description}</p>
-            <p>Location: {meal.location}</p>
-            <p>Meal Time: {meal.meal_time}</p>
-            <p>Max Reservations: {meal.max_reservations}</p>
-            <p>Price: {meal.price}</p>
-
-            <MealReview mealId={meal.id} />
-        </div>
+        <>
+            <div>
+                <h2>{meal.title}</h2>
+                <p>Description: {meal.description}</p>
+                <p>Location: {meal.location}</p>
+                <p>Meal Time: {meal.meal_time}</p>
+                <p>Max Reservations: {meal.max_reservations}</p>
+                <p>Price: {meal.price}</p>
+            </div>
+            <div>
+                <MealReview mealId={meal.id} />
+            </div>
+            <div>
+                <ReservationForm mealId={meal.id}></ReservationForm>
+            </div>
+            </>
     );
 };
 
