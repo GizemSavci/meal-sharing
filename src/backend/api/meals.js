@@ -12,20 +12,6 @@ import knex from "../database.js";
 //   }
 // });
 
-// Copy from node-week2/gizem
-
-// router.get('/', async (req, res) => {
-//   try {
-//     const allMeals = await knex.select('*').from('meal');
-//     if (allMeals){
-//       res.json(allMeals);
-//     }else {
-//       res.send('No meals found')
-//     }
-// }catch (error){
-//     console.error(error)
-//   }
-// });
 
 // /api/meals	POST	Adds a new meal to the database
 router.post('/', async (req, res) => {
@@ -76,6 +62,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // GET all reviews for a specific meal 28.04
+// Cancel array on allReviews 10.05
 router.get("/:meal_id/reviews", async (req, res) => {
   const mealId = req.params.meal_id;
   try {
@@ -106,7 +93,7 @@ router.delete('/:id', async (req, res) => {
 
 
 
-// maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90 WORKS
+
 // availableReservations  Boolean Returns all meals that still have available spots left, if true. If false, return meals that have no available spots left.1 api/meals?availableReservations=true
 //  title String  Returns all meals that partially match the given title. Rød grød will match the meal with the title Rød grød med fløde. api/meals?title=Indian%20platter WORKS
 // dateAfter  Date  Returns all meals where the date for when is after the given date.  api/meals?dateAfter=2022-10-01 WORKS
@@ -129,21 +116,27 @@ router.get("/", async (req, res) => {
 
   let query = knex('meal')
   //console.log(maxPrice);
-  
+  //console.log(availableReservations);
+
+  // maxPrice Number  Returns all meals that are cheaper than maxPrice. api/meals?maxPrice=90 WORKS
   if (maxPrice){
-  
     query = query.where('price', '<', +req.query.maxPrice)
     //res.json( await query)
   }
 
-  if (availableReservations === 'true') {
-    query = query.leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
-         .groupBy('meal.id')
-         .havingRaw('SUM(reservation.number_of_guests) < meal.max_reservations');
+  if (availableReservations === "true") {
+    query = query
+      .innerJoin("reservation", "meal.id", "reservation.meal_id")
+      .groupBy("meal.id")
+      .select("meal.*");
+  } else if (availableReservations === "false") {
   }
+
+  
 
   if (title){
     query = query.where('meal.title', 'like', `${title}`);
+    console.log(title);
   }
 
   if (dateAfter) {
