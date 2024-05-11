@@ -1,0 +1,17 @@
+.block-container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.left-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.right-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
