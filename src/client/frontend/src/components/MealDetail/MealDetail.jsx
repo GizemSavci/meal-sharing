@@ -35,8 +35,6 @@ const MealDetail = () => {
             <p>Price: {meal.price}</p>
 
             <MealReview mealId={meal.id} />
-
-            {/* Reservation form and status can remain here */}
         </div>
     );
 };

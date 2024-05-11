@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarIcon from "../StarIcon/StarIcon";
 
 const MealReview = ({ mealId }) => { 
     const [reviews, setReviews] = useState([]);
@@ -27,7 +28,9 @@ const MealReview = ({ mealId }) => {
             {reviews.length > 0 ? (
                 reviews.map(review => (
                     <div key={review.id}>
-                        <p>Rating: {review.stars}</p>
+                        <p>Rating: {Array.from({ length: review.stars }).map((_, index) => (
+                            <StarIcon key={index} filled />
+                        ))}</p>
                         <p>Comment: {review.description}</p>
                     </div>
                 ))
