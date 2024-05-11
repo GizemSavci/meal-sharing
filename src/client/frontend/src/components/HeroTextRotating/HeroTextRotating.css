@@ -1,0 +1,48 @@
+.wrapper{
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    font-family: inter;
+    font-size: 120px;
+    font-weight: 900;
+    z-index: 2;
+    color: #3B23CD;
+}
+
+.wrapper p{
+    color: #3B23CD;
+}
+
+.words{
+    overflow: hidden;
+}
+
+span{
+    display: block;
+    height: 100%;
+    padding-left: 10px;
+
+    animation: spin_words 12s infinite;
+}
+
+@keyframes spin_words{
+    0%{
+        transform: translateY(0%);
+    }
+    25%{
+        transform: translateY(-50%);
+    }
+    50%{
+        transform: translateY(-100%);
+    }
+
+    75%{
+        transform: translateY(0%);
+    }
+
+    100%{
+        transform: translateY(-100%);
+    }
+}
+

@@ -1,9 +1,9 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://www.hackyourfuture.dk/static/logo-dark.svg" alt="Project logo"></a>
+
 </p>
 
-<h3 align="center">Meal sharing api</h3>
+<h3 align="center">Fullstack Meal Sharing Web Application</h3>
 
 <div align="center">
 
@@ -14,62 +14,56 @@
 
 ---
 
-<p align="center"> Website api for sharing meals together. Invite your best friends or your family for dinner!
+<p align="center"> Invite your best friends or your family for dinner! Or make new friends by sharing your meals!
     <br> 
 </p>
+<img width="1470" alt="MealSharingHeroImage" src="https://github.com/GizemSavci/meal-sharing/assets/129002582/7dacd07f-66ab-4cd1-922b-31b651afce88">
+P.S: An awesome logo is in progress.
+
 
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [Authors](#authors)
+- [C4 Model Visualisation](#c4_model_visualisation)
+- [Demo](#demo)
 
 ## 🧐 About <a name = "about"></a>
 
-Link to deployed website: 
+This is an ongoing 10-week-long full-stack web application project.<br>
+**Tech Stack**<br>
+• Database: MySQL in Docker<br>
+• Backend: Node.js, Express.js, Knex.js<br>
+• API Calls: Postman<br>
+• Frontend: Vite, React<br>
+• Styling and design guides: Material Design Theme Provider, React Icons, Figma<br>
 
-This project will be built out over 3 different classes:
+#### GET methods: Used to retrieve data from the database, specifically meals, reviews, and reservations. This data is then rendered on the frontend, allowing users to view existing information.<br>
+#### POST methods: Used to add new data to the database, such as adding new meals, reviews, and reservations. This functionality enables users to contribute new information to the application.<br>
+<br>
 
-- **Nodejs week 3** - Here you will be building the backend api. Meaning you will work in the `src/backend` folder.
-- **React week 5** - Here you will be building the frontend components and routing. In this week you will be working in the `src/client` folder.
-- **Meal sharing class** - After week 5 of react you will have a specific class for finishing the meal sharing website. Here you will make everything work and deploy the website to the internet
+- **C4 Model Visualisation** <a name="c4_model_visualisation"></a>
+- System Context Diagram:
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+![SystemContextDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/358cc3f5-b30c-469f-bf0c-ec329579ba45)
+
+- Container Diagram:
+
+![ContainerDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/797f59f4-002b-4c63-a1e2-d566a17c4c09)
 
 
-### Environment variables
+- Component and API Diagram:
 
-All sensitive data like fx passwords and usernames, we dont want to add to git! This problem we solve by having environment variables. Environment variables are not committed to git and have a key value structure.
+![ComponentandAPIDiagram](https://github.com/GizemSavci/meal-sharing/assets/129002582/cbbda0b7-7678-4f91-97ac-00f827a61454)
 
-Remember to copy the `.env.example` file, and rename the copied file to `.env`. In the `.env` file add the relevant host, database name, database user and pasword to your own local database. If you are unsure of these things then select your database in the Mysql Workbench. Now press `Database` -> `Manage Connections...`. Here you can see everything you need except the password. If you forgot that, reset it.
 
-### Prerequisites
 
-- Postman
-- MySQL Workbench
+## Demo (Recorded on 01.05.2024) <a name = "demo"></a>
 
-### Installing
 
-To install run `npm install`
+https://github.com/GizemSavci/meal-sharing/assets/129002582/cca69330-9e48-40fc-ac56-79eb1a7b9e33
 
-## 🎈 Usage <a name="usage"></a>
 
-To run `npm run dev`
 
-The api can now be found on `http://localhost:3000/api/` an example is `http://localhost:3000/api/meals`
+### Fun Fact
+The painting is one of my favorite paintings and dates back to 1630. It's 'A Peasant Wedding Feast' by Pieter Brueghel the Younger.
 
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [Mysql](https://www.npmjs.com/package/mysql) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## ☁️ Deployment <a name = "deployment"></a>
-
-[Deployment guide](https://github.com/HackYourFuture-CPH/deployment-guide)
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@benna100](https://github.com/benna100) - Idea & Initial work

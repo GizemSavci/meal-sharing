@@ -1,0 +1,19 @@
+.homepage-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    margin-bottom: 20px;
+}
