@@ -1,4 +1,3 @@
-// MealForm.jsx
 import { useState } from 'react';
 
 function MealForm() {
@@ -29,10 +28,10 @@ function MealForm() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Handle successful submission
+
         console.log('Meal created successfully!');
       } else {
-        // Handle error response
+
         console.error('Failed to create meal');
       }
     } catch (error) {
