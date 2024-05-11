@@ -72,7 +72,7 @@ function ReservationForm({ mealId }) {
         <>
             <h3>Make Reservation</h3>
             {error && <p className="error">{error}</p>}
-            <form className="contactForm" onSubmit={handleSubmit}>
+            <form className="reservationForm" onSubmit={handleSubmit}>
                 <label>Number of Guests</label>
                 <input type="number" id="guests" name="guests" value={formData.guests} onChange={handleChange} />
 
