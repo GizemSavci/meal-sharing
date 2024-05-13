@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Meal from '../Meal/Meal';
-import { Link } from "react-router-dom";
 import chocolateImage from '../../assets/images/chocolate.jpg';
 import pizza1Image from '../../assets/images/pizza1.jpg';
 import pizza2Image from '../../assets/images/pizza2.jpg';
@@ -8,11 +7,10 @@ import './MealsList.css';
 
 const mealImages = [pizza1Image, pizza2Image, chocolateImage];
 
-function MealsList({ numMeals }) {
+function MealsList({ numMeals, maxPriceFilter, sortDirection }) {
     const [meals, setMeals] = useState([]);
 
-    const apiUrl = "http://localhost:5001/api/meals";
-
+    const apiUrl = `http://localhost:5001/api/meals?maxPrice=${maxPriceFilter}&sortKey=price&sortDir=${sortDirection}`;
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,7 +22,7 @@ function MealsList({ numMeals }) {
             }
         };
         fetchData();
-    }, []);
+    }, [apiUrl]);
 
     return (
         <div>

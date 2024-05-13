@@ -1,4 +1,4 @@
-import MealsList from "../MealsList/MealsList"
+//import MealsList from "../MealsList/MealsList"
 import Footer from "../Footer/Footer";
 import Hero from "../Hero/Hero";
 import "./HomePage.css";
@@ -14,7 +14,7 @@ function HomePage() {
                 <Hero></Hero>
                 
                 <div className="horizontal-grid">
-                    <MealsList numMeals={2}></MealsList>
+                    { /* <MealsList numMeals={2} ></MealsList> */ }
                 </div>
                 <div className="button-container">
                     <button onClick={() => {
